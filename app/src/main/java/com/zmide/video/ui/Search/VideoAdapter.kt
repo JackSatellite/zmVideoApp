@@ -6,6 +6,8 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
+import com.zmide.video.BaseApplication
 import com.zmide.video.R
 import com.zmide.video.logic.model.VideoItem
 
@@ -46,7 +48,9 @@ class VideoAdapter(val videoList: List<VideoItem>) :
         val movie = videoList[position]
 
         // TODO:设置海报
-        // holder.moviePoster
+        if (movie.poster !== "") Glide.with(BaseApplication.context)
+            .load(movie.poster)
+            .into(holder.moviePoster);
 
         // 设置视频名
         holder.movieName.text = movie.name
