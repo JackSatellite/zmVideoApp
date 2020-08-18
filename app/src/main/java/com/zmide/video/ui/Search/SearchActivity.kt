@@ -2,15 +2,22 @@ package com.zmide.video.ui.Search
 
 import android.content.Intent
 import android.os.Bundle
+import android.text.Editable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.widget.addTextChangedListener
+import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProviders
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.zmide.video.BaseApplication
 import com.zmide.video.R
 import com.zmide.video.logic.model.VideoItem
+import com.zmide.video.logic.model.VodCaiJiList
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
+
+    val viewMode by lazy { ViewModelProviders.of(this).get(VideoViewMode::class.java) }
 
     companion object {
 
@@ -37,6 +44,39 @@ class SearchActivity : AppCompatActivity() {
             // 存在关键词操作
             Log.d("开始搜索", keyword)
         }
+
+        search_edit_key.addTextChangedListener { editable ->
+            val content = editable.toString()
+            if (content.isNotEmpty()) {
+                viewMode.searchVideo(content)
+            }
+        }
+
+        viewMode.videoLiveData.observe(this, Observer { result ->
+            val videos = result.getOrNull()
+
+            if (videos != null) {
+                videoList.clear()
+                videos.map { video ->
+
+                    val v = video as VodCaiJiList
+                    Log.d("电影", v.vodName)
+
+                    videoList.add(
+                        VideoItem(
+                            "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2615015805.webp",
+                            v.vodName,
+                            "2019 / 中国大陆 / 科幻 冒险 灾难 / 吴京 吴京 吴京 吴京 吴京 吴京",
+                            "电影",
+                            "",
+                            "逐梦视频"
+                        )
+                    )
+
+                }
+
+            }
+        })
 
         initVideoList() // 初始化视频数据
         val layoutManager = LinearLayoutManager(this)

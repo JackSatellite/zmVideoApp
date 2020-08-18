@@ -14,6 +14,7 @@
         android:paddingBottom="10dp">
 
         <EditText
+            android:id="@+id/search_edit_key"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1" />
