@@ -10,6 +10,7 @@ import com.bumptech.glide.Glide
 import com.zmide.video.BaseApplication
 import com.zmide.video.R
 import com.zmide.video.logic.model.VideoItem
+import com.zmide.video.ui.Video.VideoActivity
 
 // 视频项列表适配器
 class VideoAdapter(val videoList: List<VideoItem>) :
@@ -17,6 +18,9 @@ class VideoAdapter(val videoList: List<VideoItem>) :
 
     // 组件控制器
     inner class ViewHolder(view: View) : RecyclerView.ViewHolder(view) {
+
+        val rootView : View = view
+
         // 视频海报 View
         val moviePoster: ImageView = view.findViewById(R.id.video_item_poster)
 
@@ -70,6 +74,11 @@ class VideoAdapter(val videoList: List<VideoItem>) :
 
         // 设置视频来源
         holder.movieSource.text = "来源：" + movie.source
+
+        // 设置视频项点击事件
+        holder.rootView.setOnClickListener {
+            VideoActivity.actionStart()
+        }
 
     }
 }

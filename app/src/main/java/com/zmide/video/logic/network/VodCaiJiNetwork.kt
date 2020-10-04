@@ -14,6 +14,8 @@ object VodCaiJiNetwork {
 
     suspend fun searchVodCaiJiList(wd: String) = vodCaiJiService.tiankongapiCom(wd).await()
 
+    suspend fun vodCaiJiInfo(id: String) = vodCaiJiService.tiankongapiCom(id).await()
+
     private suspend fun <T> Call<T>.await(): T {
         return suspendCoroutine { continuation ->
             enqueue(object : Callback<T> {

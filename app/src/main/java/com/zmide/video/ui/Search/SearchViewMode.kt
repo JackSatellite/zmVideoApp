@@ -6,7 +6,7 @@ import androidx.lifecycle.ViewModel
 import com.zmide.video.logic.model.VodCaiJiList
 import com.zmide.video.logic.network.Repository
 
-class VideoViewMode : ViewModel() {
+class SearchViewMode : ViewModel() {
 
     private val searchLiveData = MutableLiveData<String>()
 

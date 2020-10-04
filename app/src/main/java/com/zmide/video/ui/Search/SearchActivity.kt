@@ -2,7 +2,6 @@ package com.zmide.video.ui.Search
 
 import android.content.Intent
 import android.os.Bundle
-import android.text.Editable
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.widget.addTextChangedListener
@@ -13,12 +12,11 @@ import com.zmide.video.BaseApplication
 import com.zmide.video.R
 import com.zmide.video.logic.model.VideoItem
 import com.zmide.video.logic.model.VodCaiJiInfo
-import com.zmide.video.logic.model.VodCaiJiList
 import kotlinx.android.synthetic.main.activity_search.*
 
 class SearchActivity : AppCompatActivity() {
 
-    val viewMode by lazy { ViewModelProviders.of(this).get(VideoViewMode::class.java) }
+    val viewMode by lazy { ViewModelProviders.of(this).get(SearchViewMode::class.java) }
 
     companion object {
 

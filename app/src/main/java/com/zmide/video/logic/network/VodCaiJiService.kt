@@ -11,4 +11,8 @@ interface VodCaiJiService {
     @GET("api.php/provide/vod/at/json/?ac=detail")
     fun tiankongapiCom(@Query("wd") wd: String): Call<VodCaiJis>
 
+
+    @GET("api.php/provide/vod/at/json/?ac=detail")
+    fun tiankongapiComInfo(@Query("ids") id: String): Call<VodCaiJis>
+
 }
