@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.zmide.video.BaseApplication
 import com.zmide.video.R
 import com.zmide.video.logic.model.VideoItem
+import com.zmide.video.logic.model.VodCaiJiInfo
 import com.zmide.video.logic.model.VodCaiJiList
 import kotlinx.android.synthetic.main.activity_search.*
 
@@ -59,15 +60,17 @@ class SearchActivity : AppCompatActivity() {
                 videoList.clear()
                 videos.map { video ->
 
-                    val v = video as VodCaiJiList
+                    val v = video as VodCaiJiInfo
                     Log.d("电影", v.vodName)
+                    Log.d("电影ID:", v.vodActor)
+                    val info = "${v.vodYear} / ${v.vodArea} / ${v.vodClass} / ${v.vodActor}"
 
                     videoList.add(
                         VideoItem(
-                            "https://img9.doubanio.com/view/photo/s_ratio_poster/public/p2615015805.webp",
+                            v.vodPic,
                             v.vodName,
-                            "2019 / 中国大陆 / 科幻 冒险 灾难 / 吴京 吴京 吴京 吴京 吴京 吴京",
-                            "电影",
+                            info,
+                            v.vodRemarks,
                             "",
                             "逐梦视频"
                         )
@@ -75,10 +78,14 @@ class SearchActivity : AppCompatActivity() {
 
                 }
 
+                // 刷新列表
+                val adapter = VideoAdapter(videoList)
+                search_list_movies.adapter = adapter
+
             }
         })
 
-        initVideoList() // 初始化视频数据
+        // initVideoList() // 初始化视频数据
         val layoutManager = LinearLayoutManager(this)
         search_list_movies.layoutManager = layoutManager
         val adapter = VideoAdapter(videoList)
